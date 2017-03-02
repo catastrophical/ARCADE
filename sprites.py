@@ -46,7 +46,7 @@ class Player(pg.sprite.Sprite):
         self.damaged = False
 
     def get_keys(self):
-        self.rot_speed = 0
+        """self.rot_speed = 0"""
         self.vel = vec(0, 0)
         keys = pg.key.get_pressed()
         if keys[pg.K_LEFT] or keys[pg.K_a]:
@@ -60,7 +60,7 @@ class Player(pg.sprite.Sprite):
         if keys[pg.K_SPACE]:
             self.shoot()
 
-    def shoot(self):
+    """def shoot(self):
         now = pg.time.get_ticks()
         if now - self.last_shot > WEAPONS[self.weapon]['rate']:
             self.last_shot = now
@@ -74,12 +74,12 @@ class Player(pg.sprite.Sprite):
                 if snd.get_num_channels() > 2:
                     snd.stop()
                 snd.play()
-            MuzzleFlash(self.game, pos)
+            MuzzleFlash(self.game, pos)"""
 
-    def hit(self):
+    """def hit(self):
         self.damaged = True
         self.damage_alpha = chain(DAMAGE_ALPHA * 4)
-
+"""
     def update(self):
         self.acc = vec(0, PLAYER_GRAV) #x and y 0.5 makes the player move downwards (gravity)
         #checker om der er blevet tastet paa en tastet
@@ -100,6 +100,7 @@ class Player(pg.sprite.Sprite):
 
         # set to midbottom so it can stand on the platforms
         self.rect.midbottom = self.pos
+
         if self.damaged:
             try:
                 self.image.fill((255, 255, 255, next(self.damage_alpha)), special_flags=pg.BLEND_RGBA_MULT)
@@ -119,13 +120,13 @@ class Player(pg.sprite.Sprite):
         hits = pg.sprite.spritecollide(self, self.game.walls, False)
         self.rect.x -= 1
         if hits:
-            self.vel.y = -20
+            self.vel.y = -16
     def add_health(self, amount):
         self.health += amount
         if self.health > PLAYER_HEALTH:
             self.health = PLAYER_HEALTH
 
-class Mob(pg.sprite.Sprite):
+"""class Mob(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         self._layer = MOB_LAYER
         self.groups = game.all_sprites, game.mobs
@@ -210,7 +211,7 @@ class Bullet(pg.sprite.Sprite):
         if pg.sprite.spritecollideany(self, self.game.walls):
             self.kill()
         if pg.time.get_ticks() - self.spawn_time > WEAPONS[self.game.player.weapon]['bullet_lifetime']:
-            self.kill()
+            self.kill()"""
 
 class Obstacle(pg.sprite.Sprite):
     def __init__(self, game, x, y, w, h):
@@ -224,7 +225,7 @@ class Obstacle(pg.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
-class MuzzleFlash(pg.sprite.Sprite):
+"""class MuzzleFlash(pg.sprite.Sprite):
     def __init__(self, game, pos):
         self._layer = EFFECTS_LAYER
         self.groups = game.all_sprites
@@ -263,4 +264,4 @@ class Item(pg.sprite.Sprite):
         self.step += BOB_SPEED
         if self.step > BOB_RANGE:
             self.step = 0
-            self.dir *= -1
+            self.dir *= -1"""

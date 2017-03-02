@@ -16,7 +16,7 @@ CYAN = (0, 255, 255)
 WIDTH = 1024   # 16 * 64 or 32 * 32 or 64 * 16
 HEIGHT = 768  # 16 * 48 or 32 * 24 or 64 * 12
 FPS = 60
-TITLE = "Tilemap Demo"
+TITLE = "Binary Bastards Production"
 BGCOLOR = BROWN
 
 TILESIZE = 64
@@ -26,10 +26,10 @@ GRIDHEIGHT = HEIGHT / TILESIZE
 # Player settings
 PLAYER_HEALTH = 100
 PLAYER_SPEED = 280
-PLAYER_ROT_SPEED = 200
+"""PLAYER_ROT_SPEED = 200"""
 PLAYER_IMG = 'manBlue_gun.png'
 PLAYER_HIT_RECT = pg.Rect(0, 0, 35, 35)
-BARREL_OFFSET = vec(30, 10)
+"""BARREL_OFFSET = vec(30, 10)"""
 
 # settings from platformer
 PLAYER_ACC = 1.5
@@ -37,7 +37,7 @@ PLAYER_FRICTION = -0.12
 PLAYER_GRAV = 0.8
 
 # Weapon settings
-BULLET_IMG = 'bullet.png'
+"""BULLET_IMG = 'bullet.png'
 WEAPONS = {}
 WEAPONS['pistol'] = {'bullet_speed': 500,
                      'bullet_lifetime': 1000,
@@ -76,7 +76,7 @@ NIGHT_COLOR = (20, 20, 20)
 LIGHT_RADIUS = (500, 500)
 LIGHT_MASK = "light_350_soft.png"
 
-# Layers
+"""# Layers
 WALL_LAYER = 1
 PLAYER_LAYER = 2
 BULLET_LAYER = 3
@@ -85,20 +85,22 @@ EFFECTS_LAYER = 4
 ITEMS_LAYER = 1
 
 # Items
-ITEM_IMAGES = {'health': 'health_pack.png',
+"""ITEM_IMAGES = {'health': 'health_pack.png',
                'shotgun': 'obj_shotgun.png'}
 HEALTH_PACK_AMOUNT = 20
 BOB_RANGE = 10
-BOB_SPEED = 0.3
+BOB_SPEED = 0.3"""
 
 # Sounds
 BG_MUSIC = 'espionage.ogg'
-PLAYER_HIT_SOUNDS = ['pain/8.wav', 'pain/9.wav', 'pain/10.wav', 'pain/11.wav']
+
+"""PLAYER_HIT_SOUNDS = ['pain/8.wav', 'pain/9.wav', 'pain/10.wav', 'pain/11.wav']
 ZOMBIE_MOAN_SOUNDS = ['brains2.wav', 'brains3.wav', 'zombie-roar-1.wav', 'zombie-roar-2.wav',
                       'zombie-roar-3.wav', 'zombie-roar-5.wav', 'zombie-roar-6.wav', 'zombie-roar-7.wav']
 ZOMBIE_HIT_SOUNDS = ['splat-15.wav']
 WEAPON_SOUNDS = {'pistol': ['pistol.wav'],
-                 'shotgun': ['shotgun.wav']}
+                 'shotgun': ['shotgun.wav']}"""
+
 EFFECTS_SOUNDS = {'level_start': 'level_start.wav',
                   'health_up': 'health_pack.wav',
                   'gun_pickup': 'gun_pickup.wav'}
