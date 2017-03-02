@@ -229,6 +229,9 @@ class Game:
                     self.paused = not self.paused
                 if event.key == pg.K_n:
                     self.night = not self.night
+            if event.type == pg.KEYDOWN:
+                 if event.key == pg.K_SPACE:
+                     self.player.jump()
 
     def show_start_screen(self):
         pass

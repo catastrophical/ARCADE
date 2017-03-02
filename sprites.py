@@ -39,7 +39,7 @@ class Player(pg.sprite.Sprite):
         self.hit_rect.center = self.rect.center
         self.vel = vec(0, 0)
         self.pos = vec(x, y)
-        self.rot = 0
+        self.acc = vec(0,0)
         self.last_shot = 0
         self.health = PLAYER_HEALTH
         self.weapon = 'pistol'
@@ -81,9 +81,25 @@ class Player(pg.sprite.Sprite):
         self.damage_alpha = chain(DAMAGE_ALPHA * 4)
 
     def update(self):
-        self.get_keys()
-        self.rot = (self.rot + self.rot_speed * self.game.dt) % 360
-        self.image = pg.transform.rotate(self.game.player_img, self.rot)
+        self.acc = vec(0, PLAYER_GRAV) #x and y 0.5 makes the player move downwards (gravity)
+        #checker om der er blevet tastet paa en tastet
+        # vores rect rykkes 5 pixel til hoejre eller venstre naar pilenetasterne bruges
+        keys = pg.key.get_pressed()
+        if keys[pg.K_LEFT]:
+            self.acc.x = -PLAYER_ACC
+        if keys[pg.K_RIGHT]:
+            self.acc.x = PLAYER_ACC
+        # her laves fysike love til player
+
+        # apply friction
+        # .x sets friction on the x axis only (so we accelerete when falling)
+        self.acc.x += self.vel.x * PLAYER_FRICTION
+        #acceleration
+        self.vel += self.acc
+        self.pos += self.vel + 0.5 * self.acc
+
+        # set to midbottom so it can stand on the platforms
+        self.rect.midbottom = self.pos
         if self.damaged:
             try:
                 self.image.fill((255, 255, 255, next(self.damage_alpha)), special_flags=pg.BLEND_RGBA_MULT)
@@ -97,7 +113,13 @@ class Player(pg.sprite.Sprite):
         self.hit_rect.centery = self.pos.y
         collide_with_walls(self, self.game.walls, 'y')
         self.rect.center = self.hit_rect.center
-
+    def jump(self):
+        # jump only if standing on platform
+        self.rect.x += 1
+        hits = pg.sprite.spritecollide(self, self.game.walls, False)
+        self.rect.x -= 1
+        if hits:
+            self.vel.y = -20
     def add_health(self, amount):
         self.health += amount
         if self.health > PLAYER_HEALTH:

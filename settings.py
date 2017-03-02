@@ -31,6 +31,11 @@ PLAYER_IMG = 'manBlue_gun.png'
 PLAYER_HIT_RECT = pg.Rect(0, 0, 35, 35)
 BARREL_OFFSET = vec(30, 10)
 
+# settings from platformer
+PLAYER_ACC = 1.5
+PLAYER_FRICTION = -0.12
+PLAYER_GRAV = 0.8
+
 # Weapon settings
 BULLET_IMG = 'bullet.png'
 WEAPONS = {}
