@@ -1,5 +1,3 @@
-# Tilemap Demo
-# KidsCanCode 2017
 import pygame as pg
 import sys
 from random import choice, random
@@ -14,11 +12,9 @@ class Game:
         pg.mixer.pre_init(44100, -16, 4, 2048)
         pg.init()
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
-
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         self.load_data()
-
     def load_data(self):
         game_folder = path.dirname(__file__)
         img_folder = path.join(game_folder, 'img')
@@ -66,8 +62,8 @@ class Game:
         while self.playing:
             self.dt = self.clock.tick(FPS) / 1000.0  # fix for Python 2.x
             self.events()
-            if not self.paused:
-                self.update()
+
+            self.update()
             self.draw()
 
     def quit(self):
@@ -97,11 +93,6 @@ class Game:
         if self.draw_debug:
             for wall in self.walls:
                 pg.draw.rect(self.screen, CYAN, self.camera.apply_rect(wall.rect), 1)
-
-        
-        if self.paused:
-            self.screen.blit(self.dim_screen, (0, 0))
-            self.draw_text("Paused", self.title_font, 105, RED, WIDTH / 2, HEIGHT / 2, align="center")
         pg.display.flip()
 
     def events(self):
@@ -122,6 +113,7 @@ class Game:
                  if event.key == pg.K_SPACE:
                      self.player.jump()
 
+
     def show_start_screen(self):
         pass
 
@@ -133,6 +125,7 @@ class Game:
                        WIDTH / 2, HEIGHT * 3 / 4, align="center")
         pg.display.flip()
         self.wait_for_key()
+
 
     def wait_for_key(self):
         pg.event.wait()
