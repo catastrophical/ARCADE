@@ -42,8 +42,8 @@ EFFECTS_LAYER = 4
 ITEMS_LAYER = 1
 
 # Sounds
-BG_MUSIC = 'espionage.ogg'
+"""BG_MUSIC = 'espionage.ogg'
 
 EFFECTS_SOUNDS = {'level_start': 'level_start.wav',
                   'health_up': 'health_pack.wav',
-                  'gun_pickup': 'gun_pickup.wav'}
+                  'gun_pickup': 'gun_pickup.wav'}"""
