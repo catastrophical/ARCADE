@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="150" height="18" tilewidth="32" tileheight="32" nextobjectid="54">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="150" height="18" tilewidth="32" tileheight="32" nextobjectid="56">
  <tileset firstgid="1" name="generic_platformer_tiles" tilewidth="32" tileheight="32" tilecount="768" columns="32">
   <image source="../img/generic_platformer_tiles.png" trans="00ffff" width="1024" height="768"/>
  </tileset>
@@ -104,5 +104,6 @@
   <object id="51" name="wall" x="3500" y="3" width="552" height="5"/>
   <object id="52" name="win" x="3972" y="102" width="23" height="150"/>
   <object id="53" name="wall" x="3912" y="170" width="145" height="15"/>
+  <object id="54" name="loose" x="131" y="563" width="216" height="10"/>
  </objectgroup>
 </map>

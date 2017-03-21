@@ -40,7 +40,6 @@ class Player(pg.sprite.Sprite):
         self.pos = vec(x, y)
         self.acc = vec(0,0)
 
-
     def update(self):
         self.acc = vec(0, PLAYER_GRAV) #x and PLAYER_GRAV makes the player move downwards (gravity)
         #checker om der er blevet tastet paa en tastet
@@ -51,7 +50,6 @@ class Player(pg.sprite.Sprite):
         if keys[pg.K_RIGHT]:
             self.acc.x = PLAYER_ACC
         # her laves fysike love til player
-
         # apply friction
         # .x sets friction on the x axis only (so we accelerete when falling)
         self.acc.x += self.vel.x * PLAYER_FRICTION
@@ -75,7 +73,7 @@ class Player(pg.sprite.Sprite):
         hits = pg.sprite.spritecollide(self, self.game.walls, False)
         self.rect.x -= 1
         if hits:
-            self.vel.y = -16
+            self.vel.y = -14
 
 class Obstacle(pg.sprite.Sprite):
     def __init__(self, game, x, y, w, h):
