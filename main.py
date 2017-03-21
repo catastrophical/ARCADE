@@ -59,6 +59,9 @@ class Game:
             self.update()
             self.draw()
 
+    def died(self):
+        self.playing = True
+
     def quit(self):
         pg.quit()
         sys.exit()
@@ -70,6 +73,8 @@ class Game:
 
         # if player position is bigger than HEIGHT game over
         if self.player.pos.y >= HEIGHT:
+            # in the bottom the show gameover screen gets triggered when
+            # self.playing is False (the fucntion is empty at the moment)
             self.playing = False
 
     def draw_grid(self):
@@ -132,4 +137,5 @@ g.show_start_screen()
 while True:
     g.new()
     g.run()
-    g.show_go_screen()
+    g.died()
+    #g.show_go_screen()
