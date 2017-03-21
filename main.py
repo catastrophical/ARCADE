@@ -19,10 +19,15 @@ class Game:
         game_folder = path.dirname(__file__)
         img_folder = path.join(game_folder, 'img')
         snd_folder = path.join(game_folder, 'snd')
+        music_folder = path.join(game_folder, 'music')
         self.map_folder = path.join(game_folder, 'maps')
         self.dim_screen = pg.Surface(self.screen.get_size()).convert_alpha()
         self.dim_screen.fill((0, 0, 0, 180))
         self.player_img = pg.image.load(path.join(img_folder, PLAYER_IMG)).convert_alpha()
+
+        self.effects_sounds = {}
+        for type in EFFECTS_SOUNDS:
+            self.effects_sounds[type] = pg.mixer.Sound(path.join(snd_folder, EFFECTS_SOUNDS[type]))
 
     def new(self):
         # initialize all variables and do all the setup for a new game
@@ -43,10 +48,7 @@ class Game:
                 Obstacle(self, tile_object.x, tile_object.y,
                          tile_object.width, tile_object.height)
 
-            if tile_object.name == 'loose':
-                Obstacle(self, tile_object.x, tile_object.y,
-                         tile_object.width, tile_object.height)
-
+        #spawn the camera and set the widht and height of the map so we know the area the camera can move in
         self.camera = Camera(self.map.width, self.map.height)
         self.draw_debug = False
     def run(self):
@@ -55,11 +57,11 @@ class Game:
         while self.playing:
             self.dt = self.clock.tick(FPS) / 1000.0  # fix for Python 2.x
             self.events()
-
             self.update()
             self.draw()
 
     def died(self):
+        self.effects_sounds['gun_pickup'].play()
         self.playing = True
 
     def quit(self):
@@ -69,6 +71,8 @@ class Game:
     def update(self):
         # update portion of the game loop
         self.all_sprites.update()
+
+        # update the camera with the update function and track the player
         self.camera.update(self.player)
 
         # if player position is bigger than HEIGHT game over
@@ -86,6 +90,8 @@ class Game:
     def draw(self):
         pg.display.set_caption("{:.2f}".format(self.clock.get_fps()))
         # self.screen.fill(BGCOLOR)
+
+        # here we draw everything with the camera
         self.screen.blit(self.map_img, self.camera.apply(self.map))
         # self.draw_grid()
         for sprite in self.all_sprites:
@@ -114,6 +120,7 @@ class Game:
             if event.type == pg.KEYDOWN:
                  if event.key == pg.K_SPACE:
                      self.player.jump()
+                     self.effects_sounds['jump'].play()
 
 
     def show_start_screen(self):

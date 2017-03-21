@@ -40,6 +40,7 @@ class Player(pg.sprite.Sprite):
         self.pos = vec(x, y)
         self.acc = vec(0,0)
 
+
     def update(self):
         self.acc = vec(0, PLAYER_GRAV) #x and PLAYER_GRAV makes the player move downwards (gravity)
         #checker om der er blevet tastet paa en tastet
@@ -74,6 +75,7 @@ class Player(pg.sprite.Sprite):
         self.rect.x -= 1
         if hits:
             self.vel.y = -14
+
 
 class Obstacle(pg.sprite.Sprite):
     def __init__(self, game, x, y, w, h):

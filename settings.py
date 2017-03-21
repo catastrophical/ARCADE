@@ -40,4 +40,10 @@ BULLET_LAYER = 3
 MOB_LAYER = 2
 EFFECTS_LAYER = 4
 ITEMS_LAYER = 1
- 
+
+# Sounds
+BG_MUSIC = ''
+
+
+EFFECTS_SOUNDS = {'jump': 'jump.wav',
+                  'gun_pickup': 'loose.wav'}
