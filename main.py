@@ -61,7 +61,9 @@ class Game:
             self.draw()
 
     def died(self):
-        self.effects_sounds['gun_pickup'].play()
+        # play sound
+        self.effects_sounds['loose'].play()
+        # set self.playing to True to reset the game
         self.playing = True
 
     def quit(self):
@@ -125,7 +127,7 @@ class Game:
 
     def show_start_screen(self):
         pass
-
+        
     def wait_for_key(self):
         pg.event.wait()
         waiting = True

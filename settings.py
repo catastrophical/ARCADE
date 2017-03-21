@@ -46,4 +46,4 @@ BG_MUSIC = ''
 
 
 EFFECTS_SOUNDS = {'jump': 'jump.wav',
-                  'gun_pickup': 'loose.wav'}
+                  'loose': 'loose.wav'}
