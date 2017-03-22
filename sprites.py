@@ -58,7 +58,7 @@ class Player(pg.sprite.Sprite):
         self.vel += self.acc
         self.pos += self.vel + 0.5 * self.acc
 
-        # set to midbottom so it can stand on the platforms
+        # set to midbottom so we can stand on the platforms
         self.rect.midbottom = self.pos
         self.rect = self.image.get_rect()
         self.rect.center = self.pos

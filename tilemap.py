@@ -13,7 +13,7 @@ class Map:
         # send it to filename that opens the file, and reads it all in and put it all in self.data
         with open(filename, 'rt') as f:
             for line in f:
-                # strip function removes invisible /newline so the camera dosent go one tile to far 
+                # strip function removes invisible /newline so the camera dosent go one tile to far
                 self.data.append(line.strip())
         # how many tiles widht the map is. the length of one of the lines. here line 0
         self.tilewidth = len(self.data[0])
@@ -46,6 +46,9 @@ class TiledMap:
         return temp_surface
 
 class Camera:
+    # this type of camera is drawing everything on the map in a different spot but the position of the things
+    # will stay the same.
+    
     # camera is having a widht and a height
     def __init__(self, width, height):
         # we use a rectangle to track it. 0, 0 is how far we need to put the offset

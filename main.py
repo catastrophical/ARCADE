@@ -48,6 +48,9 @@ class Game:
                 Obstacle(self, tile_object.x, tile_object.y,
                          tile_object.width, tile_object.height)
 
+
+
+
         #spawn the camera and set the widht and height of the map so we know the area the camera can move in
         self.camera = Camera(self.map.width, self.map.height)
         self.draw_debug = False
@@ -127,7 +130,7 @@ class Game:
 
     def show_start_screen(self):
         pass
-        
+
     def wait_for_key(self):
         pg.event.wait()
         waiting = True
