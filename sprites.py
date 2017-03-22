@@ -5,10 +5,16 @@ from settings import *
 from tilemap import collide_hit_rect
 vec = pg.math.Vector2
 
+#funktionen har parametre som udgør sprite og group som kan collides
+#og i en retning (fx x).
 def collide_with_walls(sprite, group, dir):
     if dir == 'x':
+        #hvis x retning: hits er lig parametre, hvor 
+        #sprite og group collides ved metoden collide_hit_rect
         hits = pg.sprite.spritecollide(sprite, group, False, collide_hit_rect)
+        #if hits is true 
         if hits:
+        #tjek op på dette afsnit
             if hits[0].rect.centerx > sprite.hit_rect.centerx:
                 sprite.pos.x = hits[0].rect.left - sprite.hit_rect.width / 2
             if hits[0].rect.centerx < sprite.hit_rect.centerx:
@@ -28,14 +34,19 @@ def collide_with_walls(sprite, group, dir):
 class Player(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         self._layer = PLAYER_LAYER
+        #bliver en del af alle sprite
         self.groups = game.all_sprites
+        #initialisere Player med pygame Sprite
         pg.sprite.Sprite.__init__(self, self.groups)
+        #Player bliver tildelt nedenstående funktionaliteter
         self.game = game
         self.image = game.player_img
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
+        #får tildelt en værdi som udgør hans collide rect. 35 * 35
         self.hit_rect = PLAYER_HIT_RECT
         self.hit_rect.center = self.rect.center
+        #Players velocity, position og acc.
         self.vel = vec(0, 0)
         self.pos = vec(x, y)
         self.acc = vec(0,0)
@@ -43,15 +54,15 @@ class Player(pg.sprite.Sprite):
 
     def update(self):
         self.acc = vec(0, PLAYER_GRAV) #x and PLAYER_GRAV makes the player move downwards (gravity)
-        #checker om der er blevet tastet paa en tastet
-        # vores rect rykkes 5 pixel til hoejre eller venstre naar pilenetasterne bruges
+        #checker om der er blevet tastet paa en tast
+
+         # vores rect rykkes 5 pixel til hoejre eller venstre naar pilenetasterne bruges
         keys = pg.key.get_pressed()
         if keys[pg.K_LEFT]:
             self.acc.x = -PLAYER_ACC
         if keys[pg.K_RIGHT]:
             self.acc.x = PLAYER_ACC
         # her laves fysike love til player
-
         # apply friction
         # .x sets friction on the x axis only (so we accelerete when falling)
         self.acc.x += self.vel.x * PLAYER_FRICTION
@@ -59,7 +70,7 @@ class Player(pg.sprite.Sprite):
         self.vel += self.acc
         self.pos += self.vel + 0.5 * self.acc
 
-        # set to midbottom so it can stand on the platforms
+        # set to midbottom so we can stand on the platforms
         self.rect.midbottom = self.pos
         self.rect = self.image.get_rect()
         self.rect.center = self.pos
@@ -75,7 +86,8 @@ class Player(pg.sprite.Sprite):
         hits = pg.sprite.spritecollide(self, self.game.walls, False)
         self.rect.x -= 1
         if hits:
-            self.vel.y = -16
+            self.vel.y = -14
+
 
 class Obstacle(pg.sprite.Sprite):
     def __init__(self, game, x, y, w, h):
