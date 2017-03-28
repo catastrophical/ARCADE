@@ -9,8 +9,13 @@ from random import choice, random
 from os import path
 #importere programkode fra settings, sprites og tilemap
 from settings import *
-from sprites import *
-from tilemap import *
+from player import *
+from obstacle import *
+from tiledmap import *
+from map import *
+from camera import *
+
+
 
 #Vi laver en klasse der hedder Game
 class Game:
@@ -53,6 +58,7 @@ class Game:
         # all_sprites bliver opdateret i forhold til sine lag
         self.all_sprites = pg.sprite.LayeredUpdates()
         self.walls = pg.sprite.Group()
+
         
 
         self.map = TiledMap(path.join(self.map_folder, 'first_level.tmx'))
@@ -146,6 +152,7 @@ class Game:
                  if event.key == pg.K_SPACE:
                      self.player.jump()
                      self.effects_sounds['jump'].play()
+                     
 
 
     def show_start_screen(self):
