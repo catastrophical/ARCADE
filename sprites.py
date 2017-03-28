@@ -1,9 +1,10 @@
-
 import pygame as pg
 from random import uniform, choice, randint, random
 from settings import *
 from tilemap import collide_hit_rect
+
 vec = pg.math.Vector2
+
 
 def collide_with_walls(sprite, group, dir):
     if dir == 'x':
@@ -25,6 +26,7 @@ def collide_with_walls(sprite, group, dir):
             sprite.vel.y = 0
             sprite.hit_rect.centery = sprite.pos.y
 
+
 class Player(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         self._layer = PLAYER_LAYER
@@ -38,12 +40,11 @@ class Player(pg.sprite.Sprite):
         self.hit_rect.center = self.rect.center
         self.vel = vec(0, 0)
         self.pos = vec(x, y)
-        self.acc = vec(0,0)
-
+        self.acc = vec(0, 0)
 
     def update(self):
-        self.acc = vec(0, PLAYER_GRAV) #x and PLAYER_GRAV makes the player move downwards (gravity)
-        #checker om der er blevet tastet paa en tastet
+        self.acc = vec(0, PLAYER_GRAV)  # x and PLAYER_GRAV makes the player move downwards (gravity)
+        # checker om der er blevet tastet paa en tastet
         # vores rect rykkes 5 pixel til hoejre eller venstre naar pilenetasterne bruges
         keys = pg.key.get_pressed()
         if keys[pg.K_LEFT]:
@@ -54,7 +55,7 @@ class Player(pg.sprite.Sprite):
         # apply friction
         # .x sets friction on the x axis only (so we accelerete when falling)
         self.acc.x += self.vel.x * PLAYER_FRICTION
-        #acceleration
+        # acceleration
         self.vel += self.acc
         self.pos += self.vel + 0.5 * self.acc
 
@@ -68,6 +69,7 @@ class Player(pg.sprite.Sprite):
         self.hit_rect.centery = self.pos.y
         collide_with_walls(self, self.game.walls, 'y')
         self.rect.center = self.hit_rect.center
+
     def jump(self):
         # jump only if standing on platform
         self.rect.x += 1

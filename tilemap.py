@@ -48,7 +48,7 @@ class TiledMap:
 class Camera:
     # this type of camera is drawing everything on the map in a different spot but the position of the things
     # will stay the same.
-    
+
     # camera is having a widht and a height
     def __init__(self, width, height):
         # we use a rectangle to track it. 0, 0 is how far we need to put the offset

@@ -86,15 +86,15 @@ class Game:
             # self.playing is False (the fucntion is empty at the moment)
             self.playing = False
 
-    def draw_grid(self):
+    """"def draw_grid(self):
         for x in range(0, WIDTH, TILESIZE):
             pg.draw.line(self.screen, LIGHTGREY, (x, 0), (x, HEIGHT))
         for y in range(0, HEIGHT, TILESIZE):
-            pg.draw.line(self.screen, LIGHTGREY, (0, y), (WIDTH, y))
+            pg.draw.line(self.screen, LIGHTGREY, (0, y), (WIDTH, y))"""
 
     def draw(self):
         pg.display.set_caption("{:.2f}".format(self.clock.get_fps()))
-        # self.screen.fill(BGCOLOR)
+        #self.screen.fill(BGCOLOR)
 
         # here we draw everything with the camera
         self.screen.blit(self.map_img, self.camera.apply(self.map))
@@ -127,21 +127,8 @@ class Game:
                      self.player.jump()
                      self.effects_sounds['jump'].play()
 
-
     def show_start_screen(self):
         pass
-
-    def wait_for_key(self):
-        pg.event.wait()
-        waiting = True
-        while waiting:
-            self.clock.tick(FPS)
-            for event in pg.event.get():
-                if event.type == pg.QUIT:
-                    waiting = False
-                    self.quit()
-                if event.type == pg.KEYUP:
-                    waiting = False
 
 # create the game object
 g = Game()
