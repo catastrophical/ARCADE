@@ -9,6 +9,7 @@ class Camera:
     
     # camera is having a widht and a height
     def __init__(self, width, height):
+        mediator = None
         # we use a rectangle to track it. 0, 0 is how far we need to put the offset
         self.camera = pg.Rect(0, 0, width, height)
         # widht and height are named so theyre easier to refer to

@@ -7,6 +7,7 @@ def collide_hit_rect(one, two):
 
 class TiledMap:
     def __init__(self, filename):
+        mediator = None
         tm = pytmx.load_pygame(filename, pixelalpha=True)
         self.width = tm.width * tm.tilewidth
         self.height = tm.height * tm.tileheight

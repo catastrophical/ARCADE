@@ -7,6 +7,7 @@ vec = pg.math.Vector2
 
 class Obstacle(pg.sprite.Sprite):
     def __init__(self, game, x, y, w, h):
+        mediator = None
         self.groups = game.walls
         pg.sprite.Sprite.__init__(self, self.groups)
         self.game = game

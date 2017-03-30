@@ -2,7 +2,7 @@ import pygame as pg
 import pytmx
 from settings import *
 
-class Map:
+'''class Map:
     # initialize the map and load the filename
     def __init__(self, filename):
         # list where we put all the maps tiles
@@ -18,4 +18,4 @@ class Map:
         self.tileheight = len(self.data)
         # pixel width and height of the screen tilewidth * tilesize
         self.width = self.tilewidth * TILESIZE
-        self.height = self.tileheight * TILESIZE
+        self.height = self.tileheight * TILESIZE'''

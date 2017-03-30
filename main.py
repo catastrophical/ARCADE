@@ -9,11 +9,14 @@ from random import choice, random
 from os import path
 #importere programkode fra settings, sprites og tilemap
 from settings import *
+from mediator import *
 from player import *
 from obstacle import *
 from tiledmap import *
 from map import *
+
 from camera import *
+
 
 
 
@@ -22,9 +25,11 @@ class Game:
     #Klassen får en metode til at initialisere sig selv
     def __init__(self):
         #Initialisering af lyd
+        mediator = None
         pg.mixer.pre_init(44100, -16, 4, 2048)
         #Initialisering af pygame
         pg.init()
+       
         #sets FULLSCREEN and makes a window for the game, and gets the WIDTH and HEIGHT from setting
         self.screen = pg.display.set_mode((WIDTH, HEIGHT),pg.FULLSCREEN)
         #sets the title of screen to TITLE from settings
@@ -56,12 +61,18 @@ class Game:
     def new(self):
         # initialize all variables and do all the setup for a new game
         # all_sprites bliver opdateret i forhold til sine lag
+        
+        
         self.all_sprites = pg.sprite.LayeredUpdates()
         self.walls = pg.sprite.Group()
-
         
+        self.mediator = Mediator()
+        
+        #self.mediator.pplayer = Player()
 
         self.map = TiledMap(path.join(self.map_folder, 'first_level.tmx'))
+        self.mediator.map = self.map
+        self.map.mediator = self.mediator
         self.map_img = self.map.make_map()
         self.map.rect = self.map_img.get_rect()
         for tile_object in self.map.tmxdata.objects:
@@ -69,16 +80,27 @@ class Game:
                              tile_object.y + tile_object.height / 2)
             if tile_object.name == 'player':
                 self.player = Player(self, obj_center.x, obj_center.y)
+                #Når mediatorens player bliver til den player vi lige har oprettet
+                #og derfor kan de snakke sammen
+                self.mediator.player = self.player
+                self.player.mediator = self.mediator
+
+                   
 
             if tile_object.name == 'wall':
-                Obstacle(self, tile_object.x, tile_object.y,
+                self.obstacle = Obstacle(self, tile_object.x, tile_object.y,
                          tile_object.width, tile_object.height)
+                self.mediator.obstacle = self.obstacle
+                self.obstacle.mediator = self.mediator
+                         
 
 
 
 
         #spawn the camera and set the widht and height of the map so we know the area the camera can move in
         self.camera = Camera(self.map.width, self.map.height)
+        self.mediator.camera = self.camera
+        self.camera.mediator = self.mediator
         self.draw_debug = False
     def run(self):
         # game loop - set self.playing = False to end the game

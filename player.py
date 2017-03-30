@@ -36,6 +36,7 @@ def collide_with_walls(sprite, group, dir):
 
 class Player(pg.sprite.Sprite):
     def __init__(self, game, x, y):
+        mediator = None
         self._layer = PLAYER_LAYER
         # bliver en del af alle sprite
         self.groups = game.all_sprites
@@ -87,7 +88,6 @@ class Player(pg.sprite.Sprite):
     def jump(self):
         # jump only if standing on platform
         self.rect.x += 1
-
         hits = pg.sprite.spritecollide(self, self.game.walls, False)
         self.rect.x -= 1
         # hvis hits velocity y = -14
